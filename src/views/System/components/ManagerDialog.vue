@@ -8,6 +8,16 @@
     width="45%"
   >
     <div :style="'width: calc(100% - ' + dialogProps.labelWidth! / 2 + 'px)'">
+      <el-form-item v-if="dialogProps.title !== '重置'" label="所属部门" prop="departId">
+        <el-cascader
+          v-model="dialogProps.row!.departId"
+          :props="{ value: 'id', label: 'name', emitPath: false, checkStrictly: true }"
+          placeholder="请选择管理员所属部门"
+          :options="departmentList"
+          :show-all-levels="false"
+          filterable
+        />
+      </el-form-item>
       <el-form
         ref="ruleFormRef"
         label-position="right"
@@ -34,7 +44,7 @@
             <el-option v-for="item in dialogProps.roleList" :key="item.Id" :label="item.name" :value="item.id" class="isabel-option" />
           </el-select>
         </el-form-item>
-<<<<<<< HEAD
+
         <el-form-item v-if="dialogProps.title !== '重置'" label="所属部门" prop="departId">
           <el-cascader
             v-model="dialogProps.row!.departId"
@@ -45,8 +55,6 @@
             filterable
           />
         </el-form-item>
-=======
->>>>>>> f51a01e3b5526a6dd5f46a00dbc646bc54665b8e
         <el-form-item v-if="dialogProps.title !== '重置'" label="状态" prop="status">
           <el-radio-group v-model="dialogProps.row!.status">
             <el-radio :label="1" border>正常</el-radio>
@@ -71,13 +79,10 @@ import { Dialog } from '@/components/Dialog'
 import { getRoleList } from '@/api/modules/role'
 import { getManagerInfoApi } from '@/api/modules/manager'
 import { useAppStoreWithOut } from '@/store/modules/app'
-<<<<<<< HEAD
 import { useDepartmentStore } from '@/store/modules/department'
 
 const departmentStore = useDepartmentStore()
 const departmentList = departmentStore.departmentList
-=======
->>>>>>> f51a01e3b5526a6dd5f46a00dbc646bc54665b8e
 const appStore = useAppStoreWithOut()
 interface DialogProps {
   title: string
