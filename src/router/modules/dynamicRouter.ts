@@ -4,7 +4,10 @@ import { LOGIN_URL } from '@/configs/config'
 import { ElNotification } from 'element-plus'
 import { useAppStoreWithOut } from '@/store/modules/app'
 import { usePermissionStore } from '@/store/modules/permission'
+<<<<<<< HEAD
 import { useDepartmentStore } from '@/store/modules/department'
+=======
+>>>>>>> f51a01e3b5526a6dd5f46a00dbc646bc54665b8e
 
 // 引入 views 文件夹下所有 vue 文件
 const modules = import.meta.glob('@/views/**/*.vue')
@@ -15,7 +18,10 @@ const modules = import.meta.glob('@/views/**/*.vue')
 export const initDynamicRouter = async () => {
   const permissionStore = usePermissionStore()
   const appStore = useAppStoreWithOut()
+<<<<<<< HEAD
   const departmentStore = useDepartmentStore()
+=======
+>>>>>>> f51a01e3b5526a6dd5f46a00dbc646bc54665b8e
   try {
     // 1.获取菜单列表 && 按钮权限（可合并到一个接口获取，根据后端不同可自行改造）
     await permissionStore.getAuthMenuList()
@@ -38,7 +44,10 @@ export const initDynamicRouter = async () => {
       redirect: permissionStore.getFlatMenuList[0].path
     }
     router.addRoute(homeItem)
+<<<<<<< HEAD
     await departmentStore.getDepartmentList()
+=======
+>>>>>>> f51a01e3b5526a6dd5f46a00dbc646bc54665b8e
     // console.log('动态路由扁平：', permissionStore.getFlatMenuList)
     // 3.添加动态路由
     permissionStore.getFlatMenuList.forEach((item: any) => {

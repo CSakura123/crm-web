@@ -36,8 +36,12 @@ import ManagerDialog from '@/views/System/components/ManagerDialog.vue'
 import { CirclePlus, Delete, EditPen, View } from '@element-plus/icons-vue'
 import { getManagerPage, addManager, editManager, deleteManager } from '@/api/modules/manager'
 import { getRoleList } from '@/api/modules/role'
+<<<<<<< HEAD
 import { useDepartmentStore } from '@/store/modules/department'
 const departmentStore = useDepartmentStore()
+=======
+
+>>>>>>> f51a01e3b5526a6dd5f46a00dbc646bc54665b8e
 // 获取 ProTable 元素，调用其获取刷新数据方法（还能获取到当前查询参数，方便导出携带参数）
 const proTable = ref()
 
@@ -64,6 +68,7 @@ const { BUTTONS } = useAuthButtons()
 
 // 表格配置项
 const columns: ColumnProps<SysManager.ResManagerList>[] = [
+<<<<<<< HEAD
   {
     prop: 'departId',
     label: '所属部门',
@@ -71,6 +76,8 @@ const columns: ColumnProps<SysManager.ResManagerList>[] = [
     fieldNames: { label: 'name', value: 'id' },
     search: { el: 'cascader', span: 2, props: { props: { checkStrictly: true }, filterable: true } }
   },
+=======
+>>>>>>> f51a01e3b5526a6dd5f46a00dbc646bc54665b8e
   { type: 'selection', fixed: 'left', width: 60 },
   {
     prop: 'account',
