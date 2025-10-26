@@ -5,6 +5,7 @@ import { ElNotification } from 'element-plus'
 import { useAppStoreWithOut } from '@/store/modules/app'
 import { usePermissionStore } from '@/store/modules/permission'
 import { useDepartmentStore } from '@/store/modules/department'
+
 // 引入 views 文件夹下所有 vue 文件
 const modules = import.meta.glob('@/views/**/*.vue')
 

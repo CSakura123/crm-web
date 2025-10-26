@@ -8,16 +8,6 @@
     width="45%"
   >
     <div :style="'width: calc(100% - ' + dialogProps.labelWidth! / 2 + 'px)'">
-      <el-form-item v-if="dialogProps.title !== '重置'" label="所属部门" prop="departId">
-        <el-cascader
-          v-model="dialogProps.row!.departId"
-          :props="{ value: 'id', label: 'name', emitPath: false, checkStrictly: true }"
-          placeholder="请选择管理员所属部门"
-          :options="departmentList"
-          :show-all-levels="false"
-          filterable
-        />
-      </el-form-item>
       <el-form
         ref="ruleFormRef"
         label-position="right"
@@ -44,7 +34,6 @@
             <el-option v-for="item in dialogProps.roleList" :key="item.Id" :label="item.name" :value="item.id" class="isabel-option" />
           </el-select>
         </el-form-item>
-
         <el-form-item v-if="dialogProps.title !== '重置'" label="所属部门" prop="departId">
           <el-cascader
             v-model="dialogProps.row!.departId"
@@ -194,5 +183,4 @@ const cancelDialog = (isClean?: boolean) => {
   }
 }
 </script>
-
 <style scoped lang="less"></style>

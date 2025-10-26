@@ -20,17 +20,18 @@
         <el-button type="danger" link :icon="Delete" v-hasPermi="['sys:department:remove']" @click="deleteDepartment(scope.row)">删除</el-button>
       </template>
     </ProTable>
-    <DepartmentDialog ref="dialogRef" />
   </div>
+  <DepartmentDialog ref="dialogRef" />
 </template>
 <script setup lang="ts" name="DepartmentManager">
 import { ref, reactive } from 'vue'
 import { ColumnProps } from '@/components/ProTable/interface'
 import ProTable from '@/components/ProTable/index.vue'
 import { DepartmentApi } from '@/api/modules/department'
-import { CirclePlus, EditPen } from '@element-plus/icons-vue'
-import DepartmentDialog from './components/DepartmentDialog.vue'
+import { CirclePlus, EditPen, Delete } from '@element-plus/icons-vue'
 import { useHandleData } from '@/hooks/useHandleData'
+import DepartmentDialog from './components/DepartmentDialog.vue'
+
 // 获取 ProTable 元素，调用其获取刷新数据方法（还能获取到当前查询参数，方便导出携带参数）
 const proTable = ref()
 
@@ -64,9 +65,8 @@ const columns: ColumnProps[] = [
   },
   { prop: 'operation', label: '操作', fixed: 'right', width: 330 }
 ]
-
-// 打开 drawer(新增、查看、编辑)
 const dialogRef = ref()
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const openDrawer = (title: string, row: Partial<any> = {}) => {
   let params = {
     title,
@@ -78,8 +78,6 @@ const openDrawer = (title: string, row: Partial<any> = {}) => {
   }
   dialogRef.value.acceptParams(params)
 }
-
-// 删除部门
 const deleteDepartment = async (params: any) => {
   await useHandleData(DepartmentApi.remove, { id: params.id }, `删除【${params.name}】`)
   proTable.value.getTableList()
