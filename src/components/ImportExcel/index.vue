@@ -56,10 +56,13 @@ const dialogVisible = ref(false)
 const parameter = ref<Partial<ExcelParameterProps>>({})
 
 // 接收父组件参数
-const acceptParams = (params?: any): void => {
-  parameter.value = params
+const acceptParams = (params: DialogProps): void => {
+  console.log('传入的参数:', params);
+  params.row = { ...dialogProps.value.row, ...params.row }
+  dialogProps.value = { ...dialogProps.value, ...params }
   dialogVisible.value = true
 }
+
 
 // Excel 导入模板下载
 const downloadTemp = () => {

@@ -50,7 +50,7 @@ const props = defineProps({
 })
 
 const slots = useSlots()
-const isFullscreen = ref(false)
+const isFullscreen = ref()
 
 const toggleFull = () => {
   isFullscreen.value = !unref(isFullscreen)
