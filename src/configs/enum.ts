@@ -103,13 +103,25 @@ export enum ContractStatus {
   APPROVED,
   REJECTED
 }
-
-export const ContractStatusList: { [key in ContractStatus]: EnumInfo } = {
-  [ContractStatus.INITIALIZING]: { value: 0, label: '初始化' },
-  [ContractStatus.UNDER_REVIEW]: { value: 1, label: '审核中' },
-  [ContractStatus.APPROVED]: { value: 2, label: '审核通过' },
-  [ContractStatus.REJECTED]: { value: 3, label: '审核未通过' }
+export const ContractStatusList = {
+  DRAFT: {
+    label: '草稿',
+    value: 0
+  },
+  PENDING: {
+    label: '待审核',
+    value: 1
+  },
+  APPROVED: {
+    label: '审核通过',
+    value: 2
+  },
+  REJECTED: {
+    label: '审核不通过',
+    value: 3
+  }
 }
+
 export enum LeadStatus {
   NOT_CONVERTED, // 未转化成客户
   CONVERTED, // 已转化为客户
@@ -134,4 +146,27 @@ export const FollowUpMethodList: { [key in FollowUpMethod]: EnumInfo } = {
   [FollowUpMethod.VISIT]: { value: 1, label: '上门拜访' },
   [FollowUpMethod.WECHAT]: { value: 2, label: '微信' },
   [FollowUpMethod.SMS]: { value: 3, label: '短信' }
+}
+export enum Log {
+  OTHER,
+  SELECT,
+  INSERT_OR_UPDATE,
+  DELETE,
+  GRANT,
+  EXPORT,
+  IMPORT,
+  FORCE,
+  CLEAN
+}
+
+export const LogList: { [key in Log]: EnumInfo } = {
+  [Log.OTHER]: { value: 0, label: '其他' },
+  [Log.SELECT]: { value: 1, label: '查询' },
+  [Log.INSERT_OR_UPDATE]: { value: 2, label: '新增或修改' },
+  [Log.DELETE]: { value: 3, label: '删除' },
+  [Log.GRANT]: { value: 4, label: '授权' },
+  [Log.EXPORT]: { value: 5, label: '导出' },
+  [Log.IMPORT]: { value: 6, label: '导入' },
+  [Log.FORCE]: { value: 7, label: '强退' },
+  [Log.CLEAN]: { value: 8, label: '清理' }
 }

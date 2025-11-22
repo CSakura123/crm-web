@@ -116,4 +116,11 @@ export namespace Forum {
   export interface Post {
     nickname: string
   }
+ 
+ 
 }
+
+export interface TradeArray{
+    timeList: string[]
+    countList?: number[]
+  }

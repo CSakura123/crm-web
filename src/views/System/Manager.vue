@@ -112,6 +112,12 @@ const columns: ColumnProps<SysManager.ResManagerList>[] = [
     label: '创建时间',
     width: 200
   },
+  {
+    prop: 'email',
+    label: '邮箱',
+    minWidth: 150,
+    search: { el: 'input' }
+  },
   { prop: 'operation', label: '操作', fixed: 'right', width: 330 }
 ]
 
