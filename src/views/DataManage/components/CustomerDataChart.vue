@@ -1,23 +1,19 @@
 <template>
   <div id="tradeBar" style="height: 100%; width: 100%"></div>
 </template>
-
 <script lang="ts" name="CustomerDataChart" setup>
 import * as echarts from 'echarts'
 import { onMounted, ref, onUnmounted, PropType, watch } from 'vue'
-import { TradeArray } from 'src/api/interface'
-
+import { TradeArray } from '@/api/interface'
 const props = defineProps({
   data: {
     type: Object as PropType<TradeArray>,
     required: true
   }
 })
-
 // 存储图表实例
 const myChart = ref<echarts.ECharts | null>(null)
-
-// 初始化图表的方法
+// 初始化图表的⽅法
 const initChart = () => {
   // 确保数据存在且有内容，并且图表容器已存在
   if (props.data.timeList.length > 0) {
@@ -28,7 +24,6 @@ const initChart = () => {
         myChart.value.dispose()
       }
       myChart.value = echarts.init(chartDom)
-
       const option = {
         tooltip: {
           trigger: 'item',
@@ -70,7 +65,8 @@ const initChart = () => {
           }
         ]
       }
-      myChart.value?.setOption(option)
+
+      myChart.value.setOption(option)
 
       // 添加窗口大小变化时的重绘逻辑
       const handleResize = () => {
@@ -87,7 +83,6 @@ const initChart = () => {
     }
   }
 }
-
 // 监听数据变化，当数据加载完成后初始化图表
 watch(
   () => props.data,
@@ -96,9 +91,8 @@ watch(
       initChart()
     }
   },
-  { immediate: true } // 立即执行一次
+  { immediate: true } // ⽴即执⾏⼀次
 )
-
 // 确保DOM挂载后检查数据
 onMounted(() => {
   if (props.data.timeList && props.data.timeList.length > 0) {

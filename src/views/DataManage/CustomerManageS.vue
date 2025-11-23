@@ -8,7 +8,7 @@
       <el-date-picker
         v-model="checkedValue"
         :type="selectedItem"
-        range-separator="至"
+        range-separator="⾄"
         start-placeholder="开始时间"
         end-placeholder="结束时间"
         placeholder="请选择统计时间"
@@ -22,16 +22,16 @@
         <el-date-picker
           v-model="startWeekValue"
           :type="selectedItem"
-          format="【第】ww【周】"
+          format="[第] ww [周]"
           placeholder="请选择开始周"
           style="margin-left: 20px"
           :disabled-date="disableFutureDates"
         />
-        <span style="margin-left: 20px">至</span>
+        <span style="margin-left: 20px">⾄</span>
         <el-date-picker
           v-model="endWeekValue"
           :type="selectedItem"
-          format="【第】ww【周】"
+          format="[第] ww [周]"
           placeholder="请选择结束周"
           style="margin-left: 20px"
           :disabled-date="disableEndWeekDates"
@@ -44,7 +44,6 @@
     </div>
   </div>
 </template>
-
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import CustomerDataChart from './components/CustomerDataChart.vue'
@@ -53,34 +52,29 @@ import { TradeArray } from '@/api/interface'
 import moment from 'moment'
 import { getFormattedDateRange } from '@/hooks/useMergeTime'
 import { ElMessage } from 'element-plus'
-
 const selectedItem = ref('day')
-// 自定义日期/月 选择的时间
+// ⾃定义⽇期/⽉ 选择的时间
 const checkedValue = ref<Array<Date>>([])
 // 周选择的时间
 const startWeekValue = ref<Date>()
 const endWeekValue = ref<Date>()
 const selectCondition = ref([
-  { label: '日客户数据统计', value: 'day' },
+  { label: '⽇客户数据统计', value: 'day' },
   { label: '周客户数据统计', value: 'week' },
-  { label: '月客户数据统计', value: 'monthrange' },
-  { label: '自定义时间客户数据统计', value: 'daterange' }
+  { label: '⽉客户数据统计', value: 'monthrange' },
+  { label: '⾃定义时间客户数据统计', value: 'daterange' }
 ])
-
 const tradeData = ref<TradeArray>({
   timeList: [],
   countList: []
 })
-
 interface TradeResponse extends IResponse {
   data: TradeArray
 }
-
 interface TradeParams {
   transactionType: string
   timeRange?: [string, string]
 }
-
 const initData = async () => {
   try {
     const res = (await CustomerApi.trendData({ transactionType: selectedItem.value })) as TradeResponse
@@ -92,18 +86,16 @@ const initData = async () => {
 onMounted(() => {
   initData()
 })
-
-// 禁止选择未来的日期
+// 禁⽌选择未来的⽇期
 const disableFutureDates = (time) => {
   const now = Date.now()
-  // 计算当前时间当天结束的时间戳 (23:59:59)
+  // 计算当前时间当天结束的时间戳（23:59:59）
   const endOfToday = new Date(now)
   endOfToday.setHours(23, 59, 59, 999)
-  // 如果日期在今天之后，则禁用
+  // 如果⽇期在今天之后，则禁⽤
   return time.getTime() > endOfToday.getTime()
 }
-
-// 结束周不能早于开始周，且不能是未来日期
+// 结束周不能早于开始周，且不能是未来⽇期
 const disableEndWeekDates = (date) => {
   if (!startWeekValue.value) {
     return date > new Date()
@@ -111,13 +103,11 @@ const disableEndWeekDates = (date) => {
   const start = new Date(startWeekValue.value)
   return date < start || date > new Date()
 }
-
 const clearSelectedItem = () => {
   checkedValue.value = []
   startWeekValue.value = undefined
   endWeekValue.value = undefined
 }
-
 // 交易数据统计
 const getStatisData = async () => {
   try {
@@ -155,7 +145,7 @@ const getStatisData = async () => {
     } else if (selectedItem.value === 'week') {
       if (startWeekValue.value instanceof Date && endWeekValue.value instanceof Date) {
         const [startWeek] = getFormattedDateRange(startWeekValue.value)
-        const [endWeek] = getFormattedDateRange(endWeekValue.value)
+        const [, endWeek] = getFormattedDateRange(endWeekValue.value)
         param = {
           ...param,
           timeRange: [startWeek, endWeek]
@@ -176,7 +166,6 @@ const getStatisData = async () => {
   }
 }
 </script>
-
 <style>
 .container-box {
   display: flex;
